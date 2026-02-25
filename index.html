@@ -26,7 +26,7 @@ body {
     position: sticky;
     top: 0;
     background: rgba(0, 59, 92, 0.95);
-    padding: 15px 8%;
+    padding: 18px 8%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -35,16 +35,17 @@ body {
 
 /* Bigger Navbar Logo */
 .nav-logo img {
-    width: 50px;   /* bigger */
+    width: 60px;
 }
 
 /* Nav Links */
 .nav-links a {
-    margin-left: 25px;
+    margin-left: 30px;
     font-size: 14px;
     text-transform: uppercase;
     letter-spacing: 1px;
     color: #ffffff;
+    text-decoration: none;
 }
 
 .nav-links a:hover {
@@ -56,17 +57,17 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 100px 8%;
+    padding: 120px 8%;
     flex-wrap: wrap;
 }
 
 /* Hero Text */
 .hero-content {
-    max-width: 550px;
+    max-width: 600px;
 }
 
 .hero-title {
-    font-size: 48px;
+    font-size: 52px;
     margin-bottom: 20px;
 }
 
@@ -76,19 +77,19 @@ body {
 
 .hero-subtitle {
     font-size: 18px;
-    margin-bottom: 30px;
+    margin-bottom: 35px;
     opacity: 0.9;
 }
 
 /* Buttons */
 .btn {
-    padding: 12px 28px;
+    padding: 14px 32px;
     border-radius: 30px;
     font-weight: 600;
     cursor: pointer;
     border: none;
     transition: 0.3s;
-    margin-right: 10px;
+    margin-right: 15px;
 }
 
 .btn-primary {
@@ -98,7 +99,7 @@ body {
 
 .btn-primary:hover {
     background: #66D9FF;
-    transform: translateY(-3px);
+    transform: translateY(-4px);
 }
 
 .btn-ghost {
@@ -113,59 +114,59 @@ body {
 
 /* Bigger Hero Logo */
 .hero-logo {
-    width: 280px; /* MUCH BIGGER */
-    filter: drop-shadow(0 20px 40px rgba(0,0,0,0.6));
+    width: 320px;
+    filter: drop-shadow(0 25px 50px rgba(0,0,0,0.6));
     animation: float 4s ease-in-out infinite;
 }
 
 /* Hero Card */
 .hero-card {
-    background: rgba(0, 59, 92, 0.8);
-    padding: 40px;
+    background: rgba(0, 59, 92, 0.85);
+    padding: 50px;
     border-radius: 25px;
-    box-shadow: 0 25px 60px rgba(0,0,0,0.5);
+    box-shadow: 0 30px 70px rgba(0,0,0,0.5);
     border: 1px solid rgba(255,255,255,0.2);
 }
 
 /* Animation */
 @keyframes float {
     0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-15px); }
+    50% { transform: translateY(-18px); }
 }
 
 /* Feature Section */
 .section {
-    padding: 60px 8%;
+    padding: 80px 8%;
     text-align: center;
 }
 
 .section-title {
-    font-size: 26px;
-    margin-bottom: 30px;
+    font-size: 28px;
+    margin-bottom: 40px;
 }
 
 .feature-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
 }
 
 .feature-card {
     background: rgba(0, 59, 92, 0.85);
-    padding: 25px;
+    padding: 30px;
     border-radius: 20px;
     border: 1px solid rgba(255,255,255,0.15);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    box-shadow: 0 25px 50px rgba(0,0,0,0.4);
 }
 
 .feature-card h3 {
-    margin-bottom: 10px;
+    margin-bottom: 12px;
 }
 
 /* Footer */
 footer {
     text-align: center;
-    padding: 20px;
+    padding: 25px;
     font-size: 12px;
     opacity: 0.8;
 }
@@ -182,10 +183,10 @@ footer {
     </div>
 
     <nav class="nav-links">
-        <a href="#">Home</a>
-        <a href="features.html">Features</a>
-        <a href="about.html">About</a>
-        <a href="contact.html">Contact</a>
+        <a href="index.html">Home</a>
+        <a href="pages/features.html">Features</a>
+        <a href="pages/about.html">About</a>
+        <a href="pages/contact.html">Contact</a>
     </nav>
 </header>
 
@@ -202,36 +203,19 @@ footer {
             with your personal fridge management system.
         </p>
 
-        <button class="btn btn-primary">Try Demo</button>
-        <button class="btn btn-ghost">Learn More</button>
+        <a href="pages/entry.html">
+            <button class="btn btn-primary">Try Demo</button>
+        </a>
+
+        <a href="pages/features.html">
+            <button class="btn btn-ghost">Learn More</button>
+        </a>
     </div>
 
     <div class="hero-card">
         <img src="images/1.png" alt="Always Fresh Logo" class="hero-logo">
     </div>
 
-</section>
-
-<!-- Features -->
-<section class="section">
-    <h2 class="section-title">Why Always Fresh?</h2>
-
-    <div class="feature-grid">
-        <div class="feature-card">
-            <h3>Virtual Fridge</h3>
-            <p>See everything in your fridge in one simple dashboard.</p>
-        </div>
-
-        <div class="feature-card">
-            <h3>Expiration Alerts</h3>
-            <p>Get notified before your food expires.</p>
-        </div>
-
-        <div class="feature-card">
-            <h3>Smart Recipes</h3>
-            <p>Get meal suggestions based on what you already have.</p>
-        </div>
-    </div>
 </section>
 
 <footer>

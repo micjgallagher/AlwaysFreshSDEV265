@@ -1,14 +1,86 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Features - Always Fresh</title>
+<meta charset="UTF-8">
+<title>Features - Always Fresh</title>
+
+<style>
+body {
+    font-family: system-ui, sans-serif;
+    margin: 0;
+    color: white;
+    background: linear-gradient(135deg, #002B44, #003B5C 40%, #005C8F 70%, #00BFFF);
+}
+
+.navbar {
+    background: rgba(0,59,92,0.95);
+    padding: 18px 8%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar img {
+    width: 50px;
+}
+
+.nav-links a {
+    margin-left: 25px;
+    text-decoration: none;
+    color: white;
+}
+
+.nav-links a:hover {
+    color: #66D9FF;
+}
+
+.section {
+    padding: 100px 8%;
+    text-align: center;
+}
+
+.card {
+    background: rgba(0,59,92,0.85);
+    padding: 30px;
+    margin: 20px auto;
+    border-radius: 20px;
+    max-width: 500px;
+}
+</style>
 </head>
-<body style="font-family: Arial; text-align:center; padding:50px;">
 
-<h1>Features Page</h1>
-<p>This is a test Features page.</p>
+<body>
 
-<a href="../index.html">⬅ Back to Home</a>
+<header class="navbar">
+    <img src="../images/1.png" alt="Logo">
+
+    <nav class="nav-links">
+        <a href="../index.html">Home</a>
+        <a href="features.html">Features</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+</header>
+
+<section class="section">
+    <h1>Features</h1>
+
+    <div class="card">
+        <h3>Virtual Fridge Dashboard</h3>
+        <p>Track all items currently stored in your fridge.</p>
+    </div>
+
+    <div class="card">
+        <h3>Expiration Alerts</h3>
+        <p>Receive notifications before food expires.</p>
+    </div>
+
+    <div class="card">
+        <h3>Smart Recipe Suggestions</h3>
+        <p>Get recipes based on ingredients you already have.</p>
+    </div>
+
+</section>
 
 </body>
 </html>

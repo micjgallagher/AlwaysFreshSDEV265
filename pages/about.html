@@ -1,14 +1,78 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>About - Always Fresh</title>
+<meta charset="UTF-8">
+<title>About - Always Fresh</title>
+
+<style>
+body {
+    font-family: system-ui, sans-serif;
+    margin: 0;
+    color: white;
+    background: linear-gradient(135deg, #002B44, #003B5C 40%, #005C8F 70%, #00BFFF);
+}
+
+.navbar {
+    background: rgba(0,59,92,0.95);
+    padding: 18px 8%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar img {
+    width: 50px;
+}
+
+.nav-links a {
+    margin-left: 25px;
+    text-decoration: none;
+    color: white;
+}
+
+.nav-links a:hover {
+    color: #66D9FF;
+}
+
+.section {
+    padding: 100px 8%;
+    text-align: center;
+}
+
+.card {
+    background: rgba(0,59,92,0.85);
+    padding: 40px;
+    margin: auto;
+    border-radius: 20px;
+    max-width: 600px;
+}
+</style>
 </head>
-<body style="font-family: Arial; text-align:center; padding:50px;">
 
-<h1>About Page</h1>
-<p>This is a test About page.</p>
+<body>
 
-<a href="index.html">⬅ Back to Home</a>
+<header class="navbar">
+    <img src="../images/1.png" alt="Logo">
+
+    <nav class="nav-links">
+        <a href="../index.html">Home</a>
+        <a href="features.html">Features</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+</header>
+
+<section class="section">
+    <h1>About Always Fresh</h1>
+
+    <div class="card">
+        <p>
+            Always Fresh is a smart fridge web application designed to reduce food waste,
+            help families track groceries, and suggest recipes based on available ingredients.
+        </p>
+    </div>
+
+</section>
 
 </body>
 </html>

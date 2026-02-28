@@ -2,12 +2,163 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Entry Page Test</title>
+    <title>Always Fresh – Add to Fridge</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .entry-container {
+            width: 100%;
+            max-width: 600px;
+            margin: 80px auto;
+            text-align: center;
+        }
+
+        .input-group {
+            margin: 30px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        input[type="text"] {
+            padding: 14px 20px;
+            width: 100%;
+            max-width: 350px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 16px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input[type="text"]:focus {
+            border-color: #00BFFF;
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 10px rgba(0, 191, 255, 0.3);
+        }
+
+        #status-message {
+            margin-top: 20px;
+            min-height: 24px;
+            font-weight: 500;
+            color: #66D9FF;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .action-links { margin-top: 30px; }
+        .action-links a { color: #ffffff; text-decoration: none; font-size: 14px; opacity: 0.7; transition: 0.3s; }
+        .action-links a:hover { opacity: 1; text-decoration: underline; }
+    </style>
 </head>
 <body>
 
-   <p>Entry</p>
-   <p>This is a test page for liking between pages</p>
+<header class="navbar">
+    <div class="nav-logo">
+        <img src="../images/1.png" alt="Always Fresh Logo">
+    </div>
+    <nav class="nav-links">
+        <a href="../index.html">Home</a>
+        <a href="entry.html">Add Food</a>
+        <a href="fridge.html">My Fridge</a>
+    </nav>
+</header>
+
+<div class="entry-container">
+    <div class="hero-card">
+        <h2 class="hero-title" style="font-size: 36px;">Add <span>Food</span></h2>
+        <p class="hero-subtitle">What are you placing in your fridge today?</p>
+
+        <div class="input-group">
+            <input type="text" id="ingredient-input" list="ingredient-options" placeholder="Type ingredient (e.g. Garlic)" autocomplete="off">
+
+            <datalist id="ingredient-options"></datalist>
+
+            <button class="btn btn-primary" onclick="checkAndAdd()" style="margin-right: 0;">Place in Fridge</button>
+        </div>
+
+        <div id="status-message"></div>
+
+        <div class="action-links">
+            <a href="fridge.html">Go to My Fridge →</a>
+        </div>
+    </div>
+</div>
+
+<footer>
+    Always Fresh • Smart Fridge Web Application • Student Project
+</footer>
+
+<script>
+    let ingredientMasterList = [];
+
+    function loadJSONData() {
+        fetch('../data/data.json')
+            .then(response => {
+                if (!response.ok) throw new Error("Database offline");
+                return response.json();
+            })
+            .then(data => {
+                ingredientMasterList = data.ingredients;
+
+                // Populate the datalist for autocomplete
+                const datalist = document.getElementById('ingredient-options');
+                ingredientMasterList.forEach(item => {
+                    const option = document.createElement('option');
+                    option.value = item.name;
+                    datalist.appendChild(option);
+                });
+            })
+            .catch(err => {
+                console.error(err);
+                document.getElementById('status-message').innerText = "Database sync failed.";
+            });
+    }
+
+    function checkAndAdd() {
+        const inputField = document.getElementById('ingredient-input');
+        const status = document.getElementById('status-message');
+        const name = inputField.value.trim();
+
+        if (!name) return;
+
+        const found = ingredientMasterList.find(item =>
+            item.name.toLowerCase() === name.toLowerCase()
+        );
+
+        if (found) {
+            updateFridgeContents(found.name, found.category);
+            status.innerText = `Success: ${found.name} has been placed in your fridge.`;
+        } else {
+            updateFridgeContents(name, "uncategorized");
+            status.innerText = `New item detected: ${name} has been placed in your fridge.`;
+        }
+
+        inputField.value = "";
+        inputField.focus();
+    }
+
+    function updateFridgeContents(name, category) {
+        const currentFridge = JSON.parse(localStorage.getItem('myFridge')) || [];
+        const newEntry = {
+            name: name,
+            category: category,
+            timeAdded: new Date().toLocaleString()
+        };
+        currentFridge.push(newEntry);
+        localStorage.setItem('myFridge', JSON.stringify(currentFridge));
+    }
+
+    // Keyboard support
+    document.getElementById('ingredient-input').addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') {
+            checkAndAdd();
+        }
+    });
+
+    loadJSONData();
+</script>
 
 </body>
 </html>

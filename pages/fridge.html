@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Always Fresh – My Fridge</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .inventory-container {
+      width: 100%;
+      max-width: 900px;
+      margin: 40px auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      color: #ffffff;
+    }
+
+    th {
+      text-align: left;
+      padding: 15px;
+      border-bottom: 2px solid #00BFFF;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 14px;
+    }
+
+    td {
+      padding: 15px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    tr:hover {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .btn-remove {
+      padding: 5px 12px;
+      background: transparent;
+      border: 1px solid #ff4d4d;
+      color: #ff4d4d;
+      border-radius: 15px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .btn-remove:hover {
+      background: #ff4d4d;
+      color: white;
+    }
+
+    .fridge-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .empty-msg {
+      padding: 40px;
+      text-align: center;
+      opacity: 0.7;
+    }
+  </style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="nav-logo">
+    <img src="../images/1.png" alt="Always Fresh Logo">
+  </div>
+  <nav class="nav-links">
+    <a href="../index.html">Home</a>
+    <a href="entry.html">Add Food</a>
+    <a href="fridge.html">My Fridge</a>
+  </nav>
+</header>
+
+<div class="inventory-container">
+  <div class="hero-card">
+    <div class="fridge-header">
+      <h2 class="hero-title" style="font-size: 32px; margin-bottom: 0;">My <span>Fridge</span></h2>
+      <button class="btn btn-ghost" onclick="emptyFridge()" style="padding: 8px 20px; font-size: 12px;">Empty Fridge</button>
+    </div>
+
+    <div id="fridge-display">
+    </div>
+  </div>
+</div>
+
+<script>
+  function renderFridge() {
+    const displayArea = document.getElementById('fridge-display');
+
+    // 1. Get data from local storage
+    const rawData = localStorage.getItem('myFridge');
+    const items = JSON.parse(rawData) || [];
+
+    // 2. If fridge is empty, show message
+    if (items.length === 0) {
+      displayArea.innerHTML = '<div class="empty-msg">Your fridge is currently empty.</div>';
+      return;
+    }
+
+    // 3. Build the table
+    let html = `
+            <table>
+                <thead>
+                    <tr>
+                        <th>Ingredient</th>
+                        <th>Category</th>
+                        <th>Placed In</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+        `;
+
+    items.forEach((item, i) => {
+      html += `
+                <tr>
+                    <td>${item.name}</td>
+                    <td style="color: #00BFFF;">${item.category}</td>
+                    <td style="opacity: 0.7; font-size: 13px;">${item.timeAdded}</td>
+                    <td><button class="btn-remove" onclick="removeItem(${i})">Remove</button></td>
+                </tr>
+            `;
+    });
+
+    html += '</tbody></table>';
+    displayArea.innerHTML = html;
+  }
+
+  function removeItem(index) {
+    let items = JSON.parse(localStorage.getItem('myFridge')) || [];
+    items.splice(index, 1); // Delete 1 item at the given index
+    localStorage.setItem('myFridge', JSON.stringify(items));
+    renderFridge(); // Refresh the list
+  }
+
+  function emptyFridge() {
+    if (confirm("Are you sure you want to remove everything from the fridge?")) {
+      localStorage.removeItem('myFridge');
+      renderFridge();
+    }
+  }
+
+  // IMPORTANT: Run this when the page finishes loading
+  window.onload = renderFridge;
+</script>
+
+<footer>
+  Always Fresh • Smart Fridge Web Application • Student Project
+</footer>
+
+</body>
+</html>

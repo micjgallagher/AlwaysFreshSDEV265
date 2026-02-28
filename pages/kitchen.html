@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Always Fresh – Smart Kitchen</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .kitchen-container {
+      width: 100%;
+      max-width: 900px;
+      margin: 40px auto;
+    }
+
+    .recipe-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 25px;
+      margin-top: 30px;
+    }
+
+    .recipe-card {
+      background: rgba(0, 59, 92, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 20px;
+      padding: 25px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+    }
+
+    .recipe-card h3 {
+      color: #00BFFF;
+      font-size: 24px;
+      margin-bottom: 15px;
+    }
+
+    .status-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .match-tag {
+      padding: 5px 12px;
+      border-radius: 15px;
+      font-size: 12px;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    .full-match { background: #27ae60; color: white; }
+    .partial-match { background: #f39c12; color: white; }
+
+    .step-list {
+      margin-top: 15px;
+      padding-left: 20px;
+      font-size: 14px;
+      opacity: 0.9;
+      color: #f5faff;
+    }
+
+    .step-list li { margin-bottom: 8px; }
+
+    .ingredient-box {
+      margin-top: 15px;
+      padding-top: 15px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .ing-label {
+      display: inline-block;
+      margin: 3px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 12px;
+    }
+
+    /* Colors for the checklist */
+    .have { background: rgba(39, 174, 96, 0.3); border: 1px solid #27ae60; color: #fff; }
+    .missing { background: rgba(231, 76, 60, 0.2); border: 1px solid #e74c3c; color: #ffcccc; opacity: 0.8; }
+  </style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="nav-logo">
+    <img src="../images/1.png" alt="Always Fresh Logo">
+  </div>
+  <nav class="nav-links">
+    <a href="../index.html">Home</a>
+    <a href="entry.html">Add Food</a>
+    <a href="fridge.html">My Fridge</a>
+    <a href="kitchen.html">Kitchen</a>
+  </nav>
+</header>
+
+<div class="kitchen-container">
+  <div class="hero-card">
+    <h2 class="hero-title" style="font-size: 32px;">Smart <span>Kitchen</span></h2>
+    <p class="hero-subtitle">Recipes found based on your current fridge inventory:</p>
+
+    <div id="recipe-results" class="recipe-grid">
+    </div>
+  </div>
+</div>
+
+<script>
+  async function initKitchen() {
+    try {
+      // 1. Load your JSON data
+      const response = await fetch('../data/data.json');
+      if (!response.ok) throw new Error("Could not load data.json");
+      const data = await response.json();
+
+      // 2. Load fridge and normalize names (lowercase + trimmed)
+      const fridgeItems = JSON.parse(localStorage.getItem('myFridge')) || [];
+      const myFridgeNames = fridgeItems.map(item => item.name.toLowerCase().trim());
+
+      console.log("Fridge Names:", myFridgeNames);
+      renderRecipes(data, myFridgeNames);
+    } catch (err) {
+      console.error("Kitchen Error:", err);
+      document.getElementById('recipe-results').innerHTML = "<p>Error loading kitchen data.</p>";
+    }
+  }
+
+
+
+  function renderRecipes(data, myFridge) {
+    const resultsArea = document.getElementById('recipe-results');
+    resultsArea.innerHTML = "";
+
+    data.recipes.forEach(recipe => {
+      // Convert ID numbers [1, 2, 3] into Name strings ["Smoked Sausage", "olive oil"...]
+      const recipeIngredientDetails = recipe.ingredients.map(id => {
+        const found = data.ingredients.find(ing => ing.id == id);
+        return found ? found.name : "Unknown Item";
+      });
+
+      // Count matches (case-insensitive)
+      const matches = recipeIngredientDetails.filter(name =>
+              myFridge.includes(name.toLowerCase().trim())
+      );
+
+      const matchPercent = Math.round((matches.length / recipeIngredientDetails.length) * 100);
+
+      // Logic: Show the recipe if the user has AT LEAST ONE matching ingredient
+      if (matches.length > 0) {
+        const card = document.createElement('div');
+        card.className = 'recipe-card';
+        const badgeClass = matchPercent === 100 ? 'full-match' : 'partial-match';
+
+        card.innerHTML = `
+                    <div class="status-header">
+                        <span class="match-tag ${badgeClass}">${matchPercent}% Match</span>
+                    </div>
+                    <h3>${recipe.name}</h3>
+
+                    <ul class="step-list">
+                        ${recipe.steps.map(step => `<li>${step}</li>`).join('')}
+                    </ul>
+
+                    <div class="ingredient-box">
+                        <p style="font-size: 13px; margin-bottom: 8px; font-weight: bold;">Ingredients Checklist:</p>
+                        ${recipeIngredientDetails.map(name => {
+          const isFound = myFridge.includes(name.toLowerCase().trim());
+          return `<span class="ing-label ${isFound ? 'have' : 'missing'}">${name}</span>`;
+        }).join('')}
+                    </div>
+                `;
+        resultsArea.appendChild(card);
+      }
+    });
+
+    if (resultsArea.innerHTML === "") {
+      resultsArea.innerHTML = "<p class='hero-subtitle'>No recipes match your current ingredients. Try adding more items like Smoked Sausage or Pasta!</p>";
+    }
+  }
+
+  // Initialize when page loads
+  window.onload = initKitchen;
+</script>
+
+<footer>
+  Always Fresh • Smart Fridge Web Application • Student Project
+</footer>
+
+</body>
+</html>ients.filter(name => !myFridge.includes(name.toLowerCase()));

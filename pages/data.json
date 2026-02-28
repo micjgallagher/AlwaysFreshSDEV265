@@ -1,0 +1,37 @@
+{
+  "ingredients": [
+    { "id": 1, "name": "Smoked Sausage", "category": "protein" },
+
+    { "id": 2, "name": "olive oil", "category": "oil" },
+
+    { "id": 3, "name": "garlic", "category": "vegetable" },
+
+    { "id": 4, "name": "lemon", "category": "fruit" },
+
+    { "id": 5, "name": "salt", "category": "seasoning" },
+
+    { "id": 6, "name": "Cajun", "category": "seasoning" },
+
+    { "id": 7, "name": "pasta", "category": "grain" },
+    { "id": 8, "name": "Cheddar Cheese", "category": "dairy" }
+
+  ],
+
+  "recipes": [
+
+    { "id": 101,
+
+      "name": "Smoked Sausage Pasta",
+
+      "ingredients": [1, 2, 3, 4, 5, 6,7,8],
+
+      "steps": [
+        "brown some smoked sausage in a skillet.",
+        "Add heavy cream and Cajun seasoning; bring to a boil.",
+        "stir in Cheddar Cheese and seasoning. Add pasta to the sauce and toss."
+      ]
+
+    }
+  ]
+
+}

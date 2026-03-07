@@ -1,37 +1,86 @@
 {
   "ingredients": [
     { "id": 1, "name": "Smoked Sausage", "category": "protein" },
-
     { "id": 2, "name": "olive oil", "category": "oil" },
-
     { "id": 3, "name": "garlic", "category": "vegetable" },
-
     { "id": 4, "name": "lemon", "category": "fruit" },
-
     { "id": 5, "name": "salt", "category": "seasoning" },
-
     { "id": 6, "name": "Cajun", "category": "seasoning" },
-
     { "id": 7, "name": "pasta", "category": "grain" },
-    { "id": 8, "name": "Cheddar Cheese", "category": "dairy" }
-
+    { "id": 8, "name": "Cheddar Cheese", "category": "dairy" },
+    { "id": 9, "name": "eggs", "category": "protein" },
+    { "id": 10, "name": "shredded cheese", "category": "dairy" },
+    { "id": 11, "name": "butter", "category": "dairy" },
+    { "id": 12, "name": "pepper", "category": "seasoning" },
+    { "id": 13, "name": "yogurt", "category": "dairy" },
+    { "id": 14, "name": "fresh berries", "category": "fruit" },
+    { "id": 15, "name": "banana", "category": "fruit" },
+    { "id": 16, "name": "granola", "category": "grain" },
+    { "id": 17, "name": "honey", "category": "sweetener" },
+    { "id": 18, "name": "cooked rice", "category": "grain" },
+    { "id": 19, "name": "chicken thighs", "category": "protein" },
+    { "id": 20, "name": "beans", "category": "legume" },
+    { "id": 21, "name": "salsa", "category": "vegetable" },
+    { "id": 22, "name": "corn", "category": "vegetable" },
+    { "id": 23, "name": "sugar", "category": "sweetener" },
+    { "id": 24, "name": "self rising flour", "category": "grain" }
   ],
-
   "recipes": [
-
-    { "id": 101,
-
+    {
+      "id": 101,
       "name": "Smoked Sausage Pasta",
-
-      "ingredients": [1, 2, 3, 4, 5, 6,7,8],
-
+      "ingredients": [1, 2, 3, 4, 5, 6, 7, 8],
       "steps": [
         "brown some smoked sausage in a skillet.",
         "Add heavy cream and Cajun seasoning; bring to a boil.",
         "stir in Cheddar Cheese and seasoning. Add pasta to the sauce and toss."
       ]
-
+    },
+    {
+      "id": 102,
+      "name": "Omelet",
+      "ingredients": [9, 10, 11, 5, 12],
+      "steps": [
+        "Whisk the eggs with a pinch of salt.",
+        "Melt butter in a non-stick skillet over medium-low heat.",
+        "Pour in the eggs and stir gently with a spatula until they start to set.",
+        "Sprinkle cheese in the center, fold it over, and slide it onto your plate."
+      ]
+    },
+    {
+      "id": 103,
+      "name": "Fruit Yogurt Bowl",
+      "ingredients": [13, 14, 15, 16, 17],
+      "steps": [
+        "Scoop your yogurt into a shallow bowl. Use the back of your spoon to smooth it out.",
+        "Arrange your sliced bananas and berries on one side of the bowl.",
+        "Pour the granola into the remaining space.",
+        "Drizzle your sweetener in a zigzag pattern over everything."
+      ]
+    },
+    {
+      "id": 104,
+      "name": "Homemade Chipotle Chicken Bowl",
+      "ingredients": [18, 19, 20, 21, 22, 10, 5, 12],
+      "steps": [
+        "Season chicken with salt, pepper, and spices. Sear in a pan for 5–6 minutes per side until charred. Let rest, then cube.",
+        "Warm up pre-cooked rice. Optionally squeeze half a lime over it and stir.",
+        "Layer the rice at the bottom of a large bowl. Add a scoop of beans next to the chicken.",
+        "Pile on your salsa, corn, and a generous handful of shredded cheese.",
+        "Top with sour cream or avocado slices if available."
+      ]
+    },
+    {
+      "id": 105,
+      "name": "Banana Bread",
+      "ingredients": [15, 11, 23, 9, 24],
+      "steps": [
+        "Preheat oven to 175°C (350°F) and grease a loaf pan.",
+        "Mash the bananas in a large bowl with a fork until mostly smooth.",
+        "Stir in the melted butter, sugar, and the beaten egg until well combined.",
+        "Gently stir in the flour until no white streaks remain.",
+        "Pour the batter into the pan and bake for 45–55 minutes."
+      ]
     }
   ]
-
 }
